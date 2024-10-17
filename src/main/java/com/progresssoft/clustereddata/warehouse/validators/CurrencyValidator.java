@@ -1,4 +1,4 @@
-package com.progresssoft.clustereddata.warehouse.controllers.responses;
+package com.progresssoft.clustereddata.warehouse.validators;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
