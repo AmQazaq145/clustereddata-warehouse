@@ -1,0 +1,32 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: clustereddata-warehouse
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      PGDATA: /data/postgres/clustereddata-warehouse
+    volumes:
+      - clustereddata-warehouse_db:/data/postgres/clustereddata-warehouse
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  clustereddata-warehouse:
+    container_name: clustereddata-warehouse
+    image: amalqazaq99/clustereddata-warehouse:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/clustereddata-warehouse
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  clustereddata-warehouse_db:
+
+
